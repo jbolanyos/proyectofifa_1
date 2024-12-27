@@ -6,3 +6,4 @@ seaborn
 os-sys
 plotly
 statsmodels
+sklearn
