@@ -10,7 +10,7 @@ from src.hipot import hipotesis1_mosaico
 
 df = pd.read_csv("data/fifaPlayers4.csv")
 
-st.header("PROYECTO FIFA - HIPÓTESIS")
+st.header("PROYECTO FIFA-HIPÓTESIS")
 
 opcion = st.selectbox(
     "Escoja la hipótesis a revisar: ",
