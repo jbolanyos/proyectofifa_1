@@ -1,5 +1,7 @@
 import streamlit as st
 
+st.set_page_config(layout="wide")
+
 st.header("PROYECTO FIFA PLAYERS - CONCLUSIONES")
 
 col1,col2 = st.columns([0.2,0.8])

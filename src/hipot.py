@@ -96,6 +96,13 @@ def hipotesis1_mosaico(data,salida):
     datax['TipoCuerpo'] = datax['Body type'].str.split("(").str[0]
     
     # Create mosaic plot from DataFrame
+    #props = {}
+    #props[('yes', 'yes')] = {'color': 'xkcd:orange'}
+    #props[('yes','no')] = {'facecolor': 'xkcd:pale blue',
+    #                   'edgecolor':'xkcd:light grey',
+    #                   'hatch':'o'}
+    
+    
     fig, _ =mosaic(datax, ['TipoCuerpo', campox])
     st.pyplot(fig)
 

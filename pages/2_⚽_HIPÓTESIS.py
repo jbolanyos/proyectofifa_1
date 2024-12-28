@@ -12,6 +12,8 @@ from src.hipot import hipotesis1_mosaico
 #from matplotlib.backends.backend_agg import RendererAgg
 #_lock = RendererAgg.lock
 
+st.set_page_config(layout="wide")
+
 df = pd.read_csv("data/fifaPlayers4.csv")
 
 st.header("PROYECTO FIFA PLAYERS - HIPÓTESIS")

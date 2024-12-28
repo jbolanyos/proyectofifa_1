@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(layout="wide")
+
 st.header("PROYECTO FIFA PLAYERS - ANÁLISIS EXPLORATORIO DE DATOS")
 
 df = pd.read_csv("data/fifaPlayers4.csv")

@@ -4,6 +4,8 @@ from src.model import entrenar
 from src.model import graficar_modelo
 from src.model import probar_modelo_1
 
+st.set_page_config(layout="wide")
+
 st.header("PROYECTO FIFA PLAYERS - MODELO ML SUPERVISADO")
 
 df = pd.read_csv("data/fifaPlayers4.csv")
