@@ -55,10 +55,9 @@ def hipotesis1(data,muestra,salida):
         x='Height',
         y='Weight',
         hue=campox,
-        #data=subset3.head(muestra)
         data=datax.head(muestra)
     )
-    #plt.show()
+    
     st.pyplot(fig)
     
 def hipotesis1_mosaico(data,salida):
@@ -98,4 +97,75 @@ def hipotesis1_mosaico(data,salida):
     
     # Create mosaic plot from DataFrame
     fig, _ =mosaic(datax, ['TipoCuerpo', campox])
+    st.pyplot(fig)
+
+def hipotesis2(data):
+    df = data.loc[:,['Age','Value','Wage','Release clause']]
+    df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
+    df = df.dropna(subset=['Age'])
+    df['Age']=df['Age'].astype(int)
+
+    df['Value'] = df['Value'].str.split("€").str[1]
+    df['Value'] = df['Value'].str.replace('K','000')
+    df['Value'] = df['Value'].str.replace('M','000000')
+    df['Value'] = df['Value'].str.replace('.','')
+
+    df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
+
+    fig, ax = plt.subplots()
+    df.groupby('Age')['Value'].mean().plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
+    st.pyplot(fig)
+
+def hipotesis3(data):
+    df = data.loc[:,['club_name','Value']]
+    df['Value'] = df['Value'].str.split("€").str[1]
+    df['Value'] = df['Value'].str.replace('K','000')
+    df['Value'] = df['Value'].str.replace('M','000000')
+    df['Value'] = df['Value'].str.replace('.','')
+    df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
+
+    dfMuestra = df.groupby('club_name')['Value'].mean()
+    dfMuestra = dfMuestra.sort_values(ascending=False)
+
+    fig, ax = plt.subplots()
+    dfMuestra.head(10).plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
+    st.pyplot(fig)
+
+def hipotesis4(data):
+    dfh4 = data.loc[:,['Attacking work rate','Defensive work rate','Value']]
+
+    dfh4['Value'] = dfh4['Value'].str.split("€").str[1]
+    dfh4['Value'] = dfh4['Value'].str.replace('K','000')
+    dfh4['Value'] = dfh4['Value'].str.replace('M','000000')
+    dfh4['Value'] = dfh4['Value'].str.replace('.','')
+    dfh4['Value'] = pd.to_numeric(dfh4['Value'], errors='coerce')
+
+    dfMuestrah4_1 = dfh4.groupby('Attacking work rate')['Value'].mean()
+    #dfMuestrah4_1 = dfMuestrah4_1.sort_values(ascending=False)
+
+    dfMuestrah4_2 = dfh4.groupby('Defensive work rate')['Value'].mean()
+    #dfMuestrah4_2 = dfMuestrah4_2.sort_values(ascending=False)
+
+    #fig, ax = plt.subplots(figsize=(8, 6))
+    #dfMuestrah4_2.plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
+    #fig.plot()
+    print()
+    fig, ax = plt.subplots()
+    dfMuestrah4_1.plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
+    st.pyplot(fig)
+
+def hipotesis5(data):
+    dfh5 = data.loc[:,['International reputation','Value']]
+
+    dfh5['Value'] = dfh5['Value'].str.split("€").str[1]
+    dfh5['Value'] = dfh5['Value'].str.replace('K','000')
+    dfh5['Value'] = dfh5['Value'].str.replace('M','000000')
+    dfh5['Value'] = dfh5['Value'].str.replace('.','')
+    dfh5['Value'] = pd.to_numeric(dfh5['Value'], errors='coerce')
+
+    dfMuestrah5 = dfh5.groupby('International reputation')['Value'].mean()
+    dfMuestrah5 = dfMuestrah5.sort_values(ascending=False)
+
+    fig, ax = plt.subplots()
+    dfMuestrah5.plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
     st.pyplot(fig)
