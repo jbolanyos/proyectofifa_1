@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 from sklearn.linear_model import LinearRegression
 
 global modelo 
@@ -79,18 +80,18 @@ def graficar_modelo(datax, variable, coltarget):
     )
     st.pyplot(fig)
 
-def probar_modelo_1(datax, variable):
-    pass
-    #datosPredictY = modelo.predict(datax[variable])
+def probar_modelo_1(datax, valorPrueba, valorx, valory):
+    #st.write(valorPrueba)
+    #st.write(valorx)
+    #st.write(valory)
+    valory = conversorColumna(valory)
+    datax = normalizar(datax,valorx)
+    datax = normalizar(datax,valory)
     
-    #fig, ax = plt.subplots()
-    #datosPlot = pd.DataFrame(columns=['x_','y_'])
-    #datosPlot['x_'] = datax[variable]
-    #datosPlot['y_'] = datosY
-    #p1=sns.scatterplot(
-    #    x='x_',
-    #    y='y_',
-    #    data=datosPlot.head(100),
-    #    ax=sns.regplot(data=datosPlot.head(100), x='x_', y='y_', line_kws={'color': 'g'})
-    #)
-    #st.pyplot(fig)
+    x = datax[valorx]
+    y = datax[valory]
+    modelo = LinearRegression()
+    modelo.fit(x.values.reshape(-1, 1), y)
+    xPrueba = np.array([valorPrueba]).reshape([-1,1])
+    ySalida = modelo.predict(xPrueba)
+    return ySalida

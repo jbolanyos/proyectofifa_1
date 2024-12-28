@@ -51,4 +51,15 @@ with col2:
         st.write("Variable más influyente:", ganador[0])
         #st.write(ganador)
         graficar_modelo(ganador[1],ganador[0],coltarget)
-        #probar_modelo_1(ganador[1],ganador[0])
+        st.write("Probar modelo con un valor de: ")
+        valorPrueba = st.slider(
+            ganador[0],
+            min_value = 10,
+            max_value = 100,
+            value=10,
+            step=1
+        )
+        resultado = probar_modelo_1(df, valorPrueba, ganador[0],coltarget)
+        st.text(coltarget)
+        st.text(resultado)
+        
