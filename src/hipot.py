@@ -114,22 +114,24 @@ def hipotesis2(data):
 
     fig, ax = plt.subplots()
     df.groupby('Age')['Value'].mean().plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
+    ax.legend(['Valor en mercado'])
     st.pyplot(fig)
 
-def hipotesis3(data):
-    df = data.loc[:,['club_name','Value']]
-    df['Value'] = df['Value'].str.split("€").str[1]
-    df['Value'] = df['Value'].str.replace('K','000')
-    df['Value'] = df['Value'].str.replace('M','000000')
-    df['Value'] = df['Value'].str.replace('.','')
-    df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
+def hipotesis3(data, valorTop):
+    if (valorTop > 0):
+        df = data.loc[:,['club_name','Value']]
+        df['Value'] = df['Value'].str.split("€").str[1]
+        df['Value'] = df['Value'].str.replace('K','000')
+        df['Value'] = df['Value'].str.replace('M','000000')
+        df['Value'] = df['Value'].str.replace('.','')
+        df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
 
-    dfMuestra = df.groupby('club_name')['Value'].mean()
-    dfMuestra = dfMuestra.sort_values(ascending=False)
+        dfMuestra = df.groupby('club_name')['Value'].mean()
+        dfMuestra = dfMuestra.sort_values(ascending=False)
 
-    fig, ax = plt.subplots()
-    dfMuestra.head(10).plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
-    st.pyplot(fig)
+        fig, ax = plt.subplots()
+        dfMuestra.head(valorTop).plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
+        st.pyplot(fig)
 
 def hipotesis4(data):
     dfh4 = data.loc[:,['Attacking work rate','Defensive work rate','Value']]
@@ -141,17 +143,19 @@ def hipotesis4(data):
     dfh4['Value'] = pd.to_numeric(dfh4['Value'], errors='coerce')
 
     dfMuestrah4_1 = dfh4.groupby('Attacking work rate')['Value'].mean()
-    #dfMuestrah4_1 = dfMuestrah4_1.sort_values(ascending=False)
+    dfMuestrah4_1 = dfMuestrah4_1.sort_values(ascending=False)
 
     dfMuestrah4_2 = dfh4.groupby('Defensive work rate')['Value'].mean()
-    #dfMuestrah4_2 = dfMuestrah4_2.sort_values(ascending=False)
+    dfMuestrah4_2 = dfMuestrah4_2.sort_values(ascending=False)
 
-    #fig, ax = plt.subplots(figsize=(8, 6))
-    #dfMuestrah4_2.plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
-    #fig.plot()
-    print()
     fig, ax = plt.subplots()
     dfMuestrah4_1.plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
+    ax.legend(['Valor en mercado'])
+    st.pyplot(fig)
+
+    fig, ax = plt.subplots()
+    dfMuestrah4_2.plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
+    ax.legend(['Valor en mercado'])
     st.pyplot(fig)
 
 def hipotesis5(data):
@@ -168,4 +172,5 @@ def hipotesis5(data):
 
     fig, ax = plt.subplots()
     dfMuestrah5.plot(kind='bar', rot=45, fontsize=10, figsize=(8, 6))
+    ax.legend(['Valor en mercado'])
     st.pyplot(fig)

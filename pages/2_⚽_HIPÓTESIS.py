@@ -45,7 +45,14 @@ elif opcion == "Hipótesis 2":
     hipotesis2(df)
 elif opcion == "Hipótesis 3":
     st.html("<b>Cuáles son los clubes que más invierten en jugadores.</b>")
-    hipotesis3(df)
+    valorTop = st.slider(
+        "Seleccione un valor de top",
+        min_value=0,
+        max_value=10,
+        step=1,
+        value=0
+    )
+    hipotesis3(df, valorTop)
 elif opcion == "Hipótesis 4":
     st.html("<b>Relación entre ingresos y efectividad defensa-ataque.</b>")
     hipotesis4(df)
